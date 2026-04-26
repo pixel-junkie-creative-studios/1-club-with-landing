@@ -35,12 +35,10 @@ export default function Home() {
       // Sync lenis with ScrollTrigger
       lenisRef.current.on('scroll', ScrollTrigger.update);
       
-      // Add ticker to update ScrollTrigger on lenis animation
-      const tick = () => {
-        ScrollTrigger.update();
-        requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
+      gsap.ticker.add((time) => {
+        lenisRef.current?.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
     }
     
     // Cleanup
@@ -56,7 +54,7 @@ export default function Home() {
   return (
     <>
       <GlobalTouch />
-      <main className="min-h-screen flex flex-col relative z-10 overflow-hidden">
+      <main className="min-h-screen flex flex-col relative z-10">
         {activeScreen === 'loading' && <AppLoader onComplete={() => setActiveScreen('landing')} />}
         {activeScreen === 'landing' && <Scrollytelling />}
         
