@@ -1,0 +1,20 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "openrouter/anthropic/claude-3.5-sonnet",
+  "provider": {
+    "openrouter": {
+      "options": {
+        "apiKey": "Psk-or-v1-64b893e8b9224f5efb52a5465b25451e57b617a2dc5fbdcb43ace0db14864493",
+        "baseURL": "https://openrouter.ai/api/v1",
+        "extraHeaders": {
+          "HTTP-Referer": "https://opencode.ai",
+          "X-Title": "OpenCode-Agent"
+        }
+      }
+    }
+  },
+  "permission": {
+    "edit": "allow",
+    "bash": "ask"
+  }
+}
