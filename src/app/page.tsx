@@ -54,7 +54,7 @@ export default function Home() {
   return (
     <>
       <GlobalTouch />
-      <main className="min-h-screen flex flex-col relative z-10">
+      <main className="relative z-10 w-full">
         {activeScreen === 'loading' && <AppLoader onComplete={() => setActiveScreen('landing')} />}
         {activeScreen === 'landing' && <Scrollytelling />}
         

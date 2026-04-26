@@ -77,10 +77,14 @@ export default function Scrollytelling() {
       { opacity: 1, scale: 1, pointerEvents: 'auto', duration: 0.5, ease: "back.out(1.7)" }
     );
 
+    // Force a refresh to calculate pin spacer height accurately
+    ScrollTrigger.refresh();
+
   }, { scope: containerRef }); // Automatically handles GSAP cleanup and context
 
   return (
-    <div ref={containerRef} className="relative w-full h-[100vh] overflow-hidden bg-fintech-dark flex items-center justify-center">
+    <div className="w-full relative bg-fintech-dark">
+      <div ref={containerRef} className="relative w-full h-[100vh] overflow-hidden bg-fintech-dark flex items-center justify-center">
       
       {/* God Level HUD Overlay */}
       <div className="absolute top-8 left-8 z-[200] pointer-events-none">
@@ -163,7 +167,7 @@ export default function Scrollytelling() {
           </HapticButton>
         </div>
       </div>
-      
+      </div>
     </div>
   );
 }
