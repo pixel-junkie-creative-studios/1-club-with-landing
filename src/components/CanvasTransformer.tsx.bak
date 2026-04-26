@@ -1,0 +1,104 @@
+'use client';
+
+import { Canvas } from '@react-three/fiber';
+import { ScrollControls, Html } from '@react-three/drei';
+import { useRef } from 'react';
+
+export default function CanvasTransformer() {
+  const scrollRef = useRef<any>(null);
+
+  return (
+    <Canvas style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh' }} camera={{ position: [0, 0, 5] }}>
+      {/* Lights */}
+      <ambientLight intensity={0.5} />
+      <directionalLight 
+        position={[5, 5, 5]} 
+        intensity={1} 
+        castShadow 
+        shadow-mapSize-width={1024} 
+        shadow-mapSize-height={1024}
+        shadow-camera-zoom={5}
+      />
+
+      {/* ScrollControls spanning 5 pages */}
+      <ScrollControls pages={5} horizontal>
+        {/* Placeholder 3D elements will go here */}
+        {/* We'll add geometric meshes as placeholders for now */}
+        <group>
+          {/* Vault placeholder - Box */}
+          <mesh position={{ x: -2, y: 0, z: 0 }} rotation={{ y: Math.PI / 4 }}>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial color={{ r: 0.8, g: 0.8, b: 0.9 }} metalness={0.8} roughness={0.2} />
+          </mesh>
+
+          {/* Supercar placeholder - Capsule */}
+          <mesh position={{ x: 0, y: 0, z: 0 }} rotation={{ y: Math.PI / 4 }}>
+            <capsuleGeometry args={[1, 0.5, 4, 8]} />
+            <meshStandardMaterial color={{ r: 0.2, g: 0.2, b: 0.8 }} metalness={0.8} roughness={0.2} />
+          </mesh>
+
+          {/* Jet placeholder - Cone */}
+          <mesh position={{ x: 2, y: 0, z: 0 }} rotation={{ y: Math.PI / 4 }}>
+            <coneGeometry args={[1, 2, 8]} />
+            <meshStandardMaterial color={{ r: 0.8, g: 0.2, b: 0.2 }} metalness={0.8} roughness={0.2} />
+          </mesh>
+
+          {/* Mansion placeholder - Box (tall) */}
+          <mesh position={{ x: -2, y: 1.5, z: -2 }} rotation={{ y: Math.PI / 4 }}>
+            <boxGeometry args={[1.5, 3, 1.5]} />
+            <meshStandardMaterial color={{ r: 0.9, g: 0.9, b: 0.9 }} metalness={0.8} roughness={0.2} />
+          </mesh>
+
+          {/* Portal placeholder - Ring/Torus */}
+          <mesh position={{ x: 0, y: 0, z: 2 }} rotation={{ x: Math.PI / 2 }}>
+            <torusGeometry args={[1.5, 0.3, 16, 100]} />
+            <meshStandardMaterial color={{ r: 0.2, g: 0.8, b: 0.2 }} metalness={0.8} roughness={0.2} />
+          </mesh>
+        </group>
+
+        {/* HTML overlay for UI */}
+        <Html>
+          <div style={{ 
+            position: 'fixed', 
+            top: '20px', 
+            left: '20px', 
+            color: 'white', 
+            fontFamily: 'monospace',
+            zIndex: 1000
+          }}>
+            Phase Tracker: <span id="phase">1</span> / 5<br />
+            kUnits Balance: <span id="balance">1000</span> kUnits
+          </div>
+        </Html>
+
+        {/* Enter Ecosystem button at the end */}
+        <Html>
+          <div style={{ 
+            position: 'fixed', 
+            bottom: '20px', 
+            left: '50%', 
+            transform: 'translateX(-50%)',
+            zIndex: 1000
+          }}>
+            <button 
+              id="enterButton"
+              style={{
+                padding: '12px 24px',
+                background: 'linear-gradient(45deg, #ff0066, #00ccff)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '30px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                boxShadow: '0 0 20px rgba(0,204,255,0.5)'
+              }}
+            >
+              ENTER ECOSYSTEM
+            </button>
+          </div>
+        </Html>
+      </ScrollControls>
+    </Canvas>
+  );
+}

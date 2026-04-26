@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,6 +24,7 @@ export default function RootLayout({
       className={`${inter.variable} antialiased dark`}
     >
       <body className="bg-background text-foreground overflow-x-hidden">
+        <CustomCursor />
         <div className="bg-mesh"></div>
         {children}
       </body>
